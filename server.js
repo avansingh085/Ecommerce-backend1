@@ -9,8 +9,8 @@ app.use(express.json());
 
 const Razorpay = require('razorpay');
 const bodyParser = require('body-parser');
-const crypto = require('crypto');
-const springedge=require('springedge');
+ const crypto = require('crypto');
+ const springedge=require('springedge');
 app.set('view engine','ejs');
 var val=1;
 const path = require("path"); 
