@@ -23,6 +23,7 @@ const cookieParser = require("cookie-parser");
 const controller=require("./controller.js");
 const db=require('./database.js');
 db();
+
 const {CartSchema,CartItemSchema,UserSchema,ProductSchema,}=require('./schema.js');
 
 const saltRounds = 10

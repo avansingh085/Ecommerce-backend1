@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Connect to MongoDB
 const db=()=>{
     try{
-mongoose.connect('mongodb://127.0.0.1:27017/Ecommerce', {
+mongoose.connect('mongodb+srv://avansingh085:SbhUyHjWETMpJWUN@cluster0.tyyrk.mongodb.net/Ecommerce', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then((res)=>{console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")});
