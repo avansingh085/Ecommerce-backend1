@@ -285,4 +285,39 @@ return res.send({name:"coorect"});
               return res.status(500).send({success:false,result:"not fetch getadrress"});
           }
     }
-  module.exports={createOrder,verifyPayment,signup,login,verifyToken,addCart,sendCart,removeCart,sendData,updateAddress,getAddress};
+    const updateItemQuantity= async(req,res)=>{
+      try{
+            const {username,productId,quantity}=req.query;
+            console.log(req.query);
+            let isExistUser=await Users.findOne({username:username});
+            if(isExistUser)
+            {
+                  let cart=await Cart.findOne({_id:isExistUser});
+                  let items=cart.items;
+                  if(cart)
+                  {
+                   for(let i=0;i<items.length;i++)
+                   {
+                    if(items[i].productId==productId)
+                    {
+                      items[i].quantity=quantity;
+                    }
+                   }
+                    cart.items=items;
+                    await cart.save();
+                    res.status(200).send({success:true,result:"operation successfully exicuted"})
+                  }
+                  else
+                  {
+                    res.status(500).send({success:false,result:"user cart not found"});
+                  }
+            }
+            else{
+              res.status(500).seond({success:false,result:"user not exist"});
+            }
+      }
+      catch(err){
+        res.status(500).send({success:false,result:"somthing error in backend updateItemQuantity"});
+      }
+    }
+  module.exports={updateItemQuantity,createOrder,verifyPayment,signup,login,verifyToken,addCart,sendCart,removeCart,sendData,updateAddress,getAddress};
