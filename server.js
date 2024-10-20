@@ -71,7 +71,7 @@ app.post('/logout', (req, res) => {
   res.clearCookie('token');
   res.send('Logged out successfully');
 });
-app.get('/updateItemQuantity',controller.updateItemQuantity);
+app.post('/updateItemQuantity',controller.updateItemQuantity);
 app.get("/getAddress",controller.getAddress);
 app.get('/verifyToken', controller.verifyToken);
 

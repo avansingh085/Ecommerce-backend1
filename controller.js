@@ -287,12 +287,14 @@ return res.send({name:"coorect"});
     }
     const updateItemQuantity= async(req,res)=>{
       try{
-            const {username,productId,quantity}=req.query;
-            console.log(req.query);
+            const {username,productId,quantity}=req.body;
+            console.log(req.body);
             let isExistUser=await Users.findOne({username:username});
             if(isExistUser)
             {
-                  let cart=await Cart.findOne({_id:isExistUser});
+              //console.log(isExistUser);
+                  let cart=await Cart.findOne({username:isExistUser._id});
+                  console.log(cart,"AVAN");
                   let items=cart.items;
                   if(cart)
                   {
@@ -309,10 +311,12 @@ return res.send({name:"coorect"});
                   }
                   else
                   {
+                    console.log("user cart not found");
                     res.status(500).send({success:false,result:"user cart not found"});
                   }
             }
             else{
+              console.log("user not exit");
               res.status(500).seond({success:false,result:"user not exist"});
             }
       }
