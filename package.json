@@ -24,6 +24,7 @@
     "nodemon": "^3.1.7",
     "path": "^0.12.7",
     "razorpay": "^2.9.4",
+    "redis": "^4.7.0",
     "springedge": "^1.0.6"
   }
 }
