@@ -26,9 +26,9 @@ const createOrder = async (req, res) => {
   }
 
   const options = {
-    amount: amount * 100, // Razorpay expects amount in the smallest currency unit (paise for INR)
+    amount: amount * 100, 
     currency: 'INR',
-    receipt: `receipt_order_${Date.now()}` // Dynamically generate a unique receipt ID
+    receipt: `receipt_order_${Date.now()}` 
   };
 
   try {
