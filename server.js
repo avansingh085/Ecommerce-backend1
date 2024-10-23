@@ -48,7 +48,6 @@ app.post('/updateItemQuantity', controller.updateItemQuantity);
 app.get("/getAddress", controller.getAddress);
 app.get('/verifyToken', controller.verifyToken);
 app.post("/sendNotification",sendNotification)
-
 app.listen(5500, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
