@@ -20,32 +20,15 @@ const bcrypt = require("bcrypt")
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const controller = require("./controller.js");
-const db = require('./database.js');
-db();
-const { CartSchema, CartItemSchema, UserSchema, ProductSchema, } = require('./schema.js');
-const saltRounds = 10
-//NO ched khani
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const Users = mongoose.model('User', UserSchema);
-let key_id = "rzp_test_099LgMWWQ1DioF";
-let key_secret = "rN6XJaPT0jTim9i9MAEmUNRC";
-
-
-const razorpay = new Razorpay({
-  key_id: key_id,
-  key_secret: key_secret
-});
-
-app.post('/createOrder', controller.createOrder);
-app.post('/verifyPayment', controller.verifyPayment);
-const jwt = require('jsonwebtoken');
 app.use(express.json());
 app.use(cookieParser());
-const axios = require('axios');
-//const Users=mongoose.model('User',UserSchema);
-const Cart = mongoose.model('Cart', CartSchema);
-const Product = mongoose.model('Product', ProductSchema);
+const db = require('./database.js');
+db();
+const {sendNotification} =require('./notification.js');
+//NO ched khani
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+app.post('/createOrder', controller.createOrder);
+app.post('/verifyPayment', controller.verifyPayment);
 app.post("/addCart", controller.addCart);
 app.get("/sendCart", controller.sendCart);
 app.get("/removeCart", controller.removeCart)
@@ -55,9 +38,7 @@ app.post("/AddComment", async (req, res) => {
 app.get("/sendData", controller.sendData);
 app.post('/signup', controller.signup);
 app.post('/login', controller.login);
-app.get("/getData", (req, res) => {
-  res.send([]);
-});
+
 app.post('/updateAddress', controller.updateAddress);
 app.post('/logout', (req, res) => {
   res.clearCookie('token');
@@ -66,6 +47,7 @@ app.post('/logout', (req, res) => {
 app.post('/updateItemQuantity', controller.updateItemQuantity);
 app.get("/getAddress", controller.getAddress);
 app.get('/verifyToken', controller.verifyToken);
+app.post("/sendNotification",sendNotification)
 
 app.listen(5500, () => {
   console.log(`Server is running on http://localhost:${port}`);
