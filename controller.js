@@ -20,7 +20,15 @@ const createOrder = async (req, res) => {
   if (!amount) {
     return res.status(400).json({ error: 'Amount is required' });
   }
-
+const getData=async (req,res)=>{
+        try{
+             let prod=await Product.find({});
+           return  res.send({data:prod});
+        }
+         catch(err){
+         return  res.status(400).send({err:"data not fetch ",data:[]});
+         }
+}
   const options = {
     amount: amount * 100, 
     currency: 'INR',
@@ -370,4 +378,4 @@ return res.send({name:"coorect"});
         res.status(500).send({success:false,result:"somthing error in backend updateItemQuantity"});
       }
     }
-  module.exports={updateItemQuantity,createOrder,verifyPayment,signup,login,verifyToken,addCart,sendCart,removeCart,sendData,updateAddress,getAddress};
+  module.exports={updateItemQuantity,getData,createOrder,verifyPayment,signup,login,verifyToken,addCart,sendCart,removeCart,sendData,updateAddress,getAddress};
