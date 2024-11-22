@@ -12,6 +12,7 @@ const crypto = require('crypto');
 const springedge = require('springedge');
 app.set('view engine', 'ejs');
 var val = 1;
+
 const path = require("path");
 const static_path = path.join(__dirname, "public");
 app.use(express.static(static_path));
