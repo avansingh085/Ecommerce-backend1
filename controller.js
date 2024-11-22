@@ -8,6 +8,7 @@ const jwt=require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const Razorpay=require('razorpay');
 require("dotenv").config();
+console.log(process.env.RAZORPAY_KEY_ID)
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET
@@ -56,7 +57,16 @@ const verifyPayment = (req, res) => {
   }
 };
 
-
+const getData=async (req,res)=>{
+  try{
+       let data=await Product.find({});
+       console.log(data,"van");
+       return res.send({data});
+  }catch(err)
+  {
+    return res.status(500).send({result:"not found",data:[]});
+  }
+}
 // const createOrder=async (req, res) => {
 //     const options = {
 //       amount: req.body.amount * 100, 
@@ -219,15 +229,7 @@ return res.send({name:"coorect"});
     }
    return res.send({success:true,result:"correct"});
   }
-  const getData=async (req,res)=>{
-    try{
-         let data=await Product.find({});
-         return res.send({data});
-    }catch(err)
-    {
-      return res.status(500).send({result:"not found",data:[]});
-    }
-  }
+  
   const sendCart=async (req,res)=>{
     try{
      // console.log(req.query)
