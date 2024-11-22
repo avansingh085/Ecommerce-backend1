@@ -41,6 +41,7 @@ app.post('/signup', controller.signup);
 app.post('/login', controller.login);
 
 app.post('/updateAddress', controller.updateAddress);
+app.get('/products',controller.getData);
 app.post('/logout', (req, res) => {
   res.clearCookie('token');
   res.send('Logged out successfully');
