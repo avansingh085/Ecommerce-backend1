@@ -35,6 +35,7 @@ app.get("/removeCart", controller.removeCart)
 app.post("/AddComment", async (req, res) => {
   res.send("hellow");
 })
+app.get('/products',controller.getData);
 app.get("/sendData", controller.sendData);
 app.post('/signup', controller.signup);
 app.post('/login', controller.login);

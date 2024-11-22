@@ -219,6 +219,15 @@ return res.send({name:"coorect"});
     }
    return res.send({success:true,result:"correct"});
   }
+  const getData=async (req,res)=>{
+    try{
+         let data=await Product.find({});
+         return res.send({data});
+    }catch(err)
+    {
+      return res.status(500).send({result:"not found",data:[]});
+    }
+  }
   const sendCart=async (req,res)=>{
     try{
      // console.log(req.query)
@@ -370,4 +379,4 @@ return res.send({name:"coorect"});
         res.status(500).send({success:false,result:"somthing error in backend updateItemQuantity"});
       }
     }
-  module.exports={updateItemQuantity,createOrder,verifyPayment,signup,login,verifyToken,addCart,sendCart,removeCart,sendData,updateAddress,getAddress};
+  module.exports={updateItemQuantity,getData,createOrder,verifyPayment,signup,login,verifyToken,addCart,sendCart,removeCart,sendData,updateAddress,getAddress};
