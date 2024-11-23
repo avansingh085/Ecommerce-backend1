@@ -7,7 +7,7 @@ const Product=mongoose.model('Product',ProductSchema);
 const jwt=require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const Razorpay=require('razorpay');
-require(".env").config();
+require("dotenv").config();
 //console.log(process.env.RAZORPAY_KEY_ID)
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID||"rzp_test_hI0niYSDJZ36yP",
