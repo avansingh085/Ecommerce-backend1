@@ -10,14 +10,11 @@ const Razorpay=require('razorpay');
 require("dotenv").config();
 console.log(process.env.RAZORPAY_KEY_ID)
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
+  key_id: process.env.RAZORPAY_KEY_ID||"rzp_test_hI0niYSDJZ36yP",
+  key_secret: process.env.RAZORPAY_KEY_SECRET||"lNO8H673Whw7DFiNC2gKV2Xo"
 });
-
-
 const createOrder = async (req, res) => {
   const { amount } = req.body;
-  
   if (!amount) {
     return res.status(400).json({ error: 'Amount is required' });
   }
