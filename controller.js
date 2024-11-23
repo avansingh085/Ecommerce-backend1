@@ -7,8 +7,8 @@ const Product=mongoose.model('Product',ProductSchema);
 const jwt=require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const Razorpay=require('razorpay');
-require("dotenv").config();
-console.log(process.env.RAZORPAY_KEY_ID)
+require(".env").config();
+//console.log(process.env.RAZORPAY_KEY_ID)
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID||"rzp_test_hI0niYSDJZ36yP",
   key_secret: process.env.RAZORPAY_KEY_SECRET||"lNO8H673Whw7DFiNC2gKV2Xo"
@@ -118,7 +118,7 @@ const getData=async (req,res)=>{
     result:"password is not correct"
   });
  }
- const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+ const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET||"189ac7bcf390094e24315f5302e07ed2d4853d27cbb3f7bdaf532f86d8025fecf3079c8fbcaa1d4166dbd783d84c1a4512e1a89810f77f7ada0a0a39e343ccfb31c066aa9d1dda3fd13f1354425745a7708cfcb6ec94109336327d0797a1e30ace0b77f82be6f1782d96ff1785e3bfe4896e24a480b02129e4ef3076bcf47d9c3bc3f0811550392eed1664ca57c47368ed48f77e9faf124ac517f51015669e9f031b5bf8fbc92a5ca12abb6133b72e0423e1538d5b31fa2209140d6594be451b6bef2da76ccb60d844cdf84a0f303f2b853de19574688a4ada6b9120556ebbd413fcbd7c26c5e7952477dc4b5348124da0c1a5cfd41ef4a8d446c771c70b820f", {
  expiresIn: '1h',
  });
  return res.send({ success:true,token :token});
@@ -135,7 +135,7 @@ return res.send({name:"coorect"});
    if(!token)
        res.send({success:false});
   try{
-     const verified = jwt.verify(token, process.env.JWT_SECRET);
+     const verified = jwt.verify(token, process.env.JWT_SECRET||"189ac7bcf390094e24315f5302e07ed2d4853d27cbb3f7bdaf532f86d8025fecf3079c8fbcaa1d4166dbd783d84c1a4512e1a89810f77f7ada0a0a39e343ccfb31c066aa9d1dda3fd13f1354425745a7708cfcb6ec94109336327d0797a1e30ace0b77f82be6f1782d96ff1785e3bfe4896e24a480b02129e4ef3076bcf47d9c3bc3f0811550392eed1664ca57c47368ed48f77e9faf124ac517f51015669e9f031b5bf8fbc92a5ca12abb6133b72e0423e1538d5b31fa2209140d6594be451b6bef2da76ccb60d844cdf84a0f303f2b853de19574688a4ada6b9120556ebbd413fcbd7c26c5e7952477dc4b5348124da0c1a5cfd41ef4a8d446c771c70b820f");
      if(!verified)
      {
         res.send({success:true})
@@ -177,7 +177,7 @@ return res.send({name:"coorect"});
         });
      await newUser.save();
      let user=await Users.find({username:username});
-     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET||"189ac7bcf390094e24315f5302e07ed2d4853d27cbb3f7bdaf532f86d8025fecf3079c8fbcaa1d4166dbd783d84c1a4512e1a89810f77f7ada0a0a39e343ccfb31c066aa9d1dda3fd13f1354425745a7708cfcb6ec94109336327d0797a1e30ace0b77f82be6f1782d96ff1785e3bfe4896e24a480b02129e4ef3076bcf47d9c3bc3f0811550392eed1664ca57c47368ed48f77e9faf124ac517f51015669e9f031b5bf8fbc92a5ca12abb6133b72e0423e1538d5b31fa2209140d6594be451b6bef2da76ccb60d844cdf84a0f303f2b853de19574688a4ada6b9120556ebbd413fcbd7c26c5e7952477dc4b5348124da0c1a5cfd41ef4a8d446c771c70b820f", {
         expiresIn: '1h',
         });
     res.send({success:true,info:"registered",token:token});
